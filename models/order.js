@@ -1,7 +1,7 @@
-const {Schema, model} = require('mongoose')
+const { Schema, model } = require('mongoose')
 
-const orderSchema = new Schema ({
-    foodItem:{
+const orderSchema = new Schema({
+    foodItem: {
         type: String,
         required: true
     },
@@ -23,6 +23,6 @@ const orderSchema = new Schema ({
     }
 })
 
-const Order = model ('Order', orderSchema)
+const Order = model('Order', orderSchema)
 
 module.exports = Order
