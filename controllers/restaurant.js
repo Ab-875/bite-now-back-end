@@ -2,8 +2,8 @@ const Restaurant = require('../models/restaurant')
 
 async function createRestaurant(req, res) {
     try {
-        const createdOrder = await Restaurant.create(req.body)
-        res.status(201).json(createdOrder)
+        const createdRestaurant = await Restaurant.create(req.body)
+        res.status(201).json(createdRestaurant)
     }
     catch (error) {
         res.status(500).json({ error: error.message })
@@ -12,8 +12,8 @@ async function createRestaurant(req, res) {
 
 async function allRestaurants(req, res) {
     try {
-        const allOrders = await Restaurant.find()
-        res.status(200).json(allOrders)
+        const allRestaurants = await Restaurant.find()
+        res.status(200).json(allRestaurants)
     }
     catch (error) {
         res.status(500).json({ error: error.message })
@@ -22,8 +22,8 @@ async function allRestaurants(req, res) {
 
 async function showRestaurant(req, res) {
     try {
-        const order = await Restaurant.findById(req.params.id)
-        res.status(200).json(order)
+        const oneRestaurant = await Restaurant.findById(req.params.id)
+        res.status(200).json(oneRestaurant)
     }
     catch (error) {
         res.status(500).json({ error: error.message })
@@ -32,8 +32,8 @@ async function showRestaurant(req, res) {
 
 async function updateRestaurant(req, res) {
     try {
-        const updatedOrder = await Restaurant.findByIdAndUpdate(req.params.id, req.body, { new: true })
-        res.status(200).json(updatedOrder)
+        const updatedRestaurant = await Restaurant.findByIdAndUpdate(req.params.id, req.body, { new: true })
+        res.status(200).json(updatedRestaurant)
     }
     catch (error) {
         res.status(500).json({ error: error.message })
@@ -42,8 +42,8 @@ async function updateRestaurant(req, res) {
 
 async function deleteRestaurant(req, res) {
     try {
-        const deletedTrack = await Restaurant.findByIdAndDelete(req.params.id)
-        res.status(200).json(deletedTrack)
+        const deletedRestaurant = await Restaurant.findByIdAndDelete(req.params.id)
+        res.status(200).json(deletedRestaurant)
     }
     catch (error) {
         res.status(500).json({ error: error.message })
