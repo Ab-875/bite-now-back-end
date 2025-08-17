@@ -42,8 +42,8 @@ async function updateOrder(req, res) {
 
 async function deleteOrder(req, res) {
     try {
-        const deletedTrack = await Order.findByIdAndDelete(req.params.id)
-        res.status(200).json(deletedTrack)
+        const deletedOrder = await Order.findByIdAndDelete(req.params.id)
+        res.status(200).json(deletedOrder)
     }
     catch (error) {
         res.status(500).json({ error: error.message })
