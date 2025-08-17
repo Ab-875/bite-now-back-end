@@ -1,21 +1,7 @@
-const {Schema,model} = require('mongoose')
+const {Schema,model, default: mongoose} = require('mongoose')
 
 
-const menuSchema = new Schema ({
-    item: {
-        type: String,
-        required: true
-    },
-    price: {
-        type: Number,
-        required: true
-    },
-    description: {
-        type: String,
-        required: true,
-        minlength : 15
-    }
-})
+
 
 const restaurantSchema = new Schema ({
     name: {
@@ -28,7 +14,10 @@ const restaurantSchema = new Schema ({
     rating: {
         type: Number,
     },
-    menu: [menuSchema]
+    menu: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "Menu"
+    }
 })
 
 const Restaurant = model('Restaurant', restaurantSchema)
