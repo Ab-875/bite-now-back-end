@@ -5,6 +5,8 @@ const mongoose = require('mongoose')
 const cors = require('cors')
 
 const orderRoutes = require('./routes/orderRoutes')
+const orderRoutes = require('./routes/menuRoutes')
+const orderRoutes = require('./routes/restaurantRoutes')
 
 
 const app = express()
@@ -18,6 +20,8 @@ app.use(cors())
 app.use(express.json())
 app.use(logger('dev'))
 app.use('/order', orderRoutes)
+app.use('/menu', menuRoutes)
+app.use('/restaurant', restaurantRoutes)
 
 const port = process.env.PORT
 
