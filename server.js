@@ -7,6 +7,7 @@ const cors = require('cors')
 const orderRoutes = require('./routes/orderRoutes')
 const menuRoutes = require('./routes/menuRoutes')
 const restaurantRoutes = require('./routes/restaurantRoutes')
+const authRoutes = require('./routes/authRoutes')
 
 
 const app = express()
@@ -19,6 +20,7 @@ mongoose.connection.on('connected', () => {
 app.use(cors())
 app.use(express.json())
 app.use(logger('dev'))
+app.use('/auth', authRoutes)
 app.use('/order', orderRoutes)
 app.use('/restaurant', restaurantRoutes)
 app.use('/menu', menuRoutes)
