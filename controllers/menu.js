@@ -1,6 +1,6 @@
 const Item = require('../models/menu')
 
-async function createdItem(req, res) {
+async function createdMenu(req, res) {
     try {
         const createdItem = await Item.create(req.body)
         res.status(201).json(createdItem)
@@ -10,7 +10,7 @@ async function createdItem(req, res) {
     }
 }
 
-async function allItems(req, res) {
+async function allMenus(req, res) {
     try {
         const allItems = await Item.find()
         res.status(200).json(allItems)
@@ -20,7 +20,7 @@ async function allItems(req, res) {
     }
 }
 
-async function showItem(req, res) {
+async function showMenu(req, res) {
     try {
         const item = await Item.findById(req.params.id)
         res.status(200).json(item)
@@ -30,7 +30,7 @@ async function showItem(req, res) {
     }
 }
 
-async function updateItem(req, res) {
+async function updateMenu(req, res) {
     try {
         const updatedItem = await Item.findByIdAndUpdate(req.params.id, req.body, { new: true })
         res.status(200).json(updatedItem)
@@ -40,7 +40,7 @@ async function updateItem(req, res) {
     }
 }
 
-async function deleteItem(req, res) {
+async function deleteMenu(req, res) {
     try {
         const deletedItem = await Item.findByIdAndDelete(req.params.id)
         res.status(200).json(deletedItem)
@@ -51,9 +51,9 @@ async function deleteItem(req, res) {
 }
 
 module.exports = {
-    createdItem,
-    allItems,
-    showItem,
-    updateItem,
-    deleteItem
+    createdMenu,
+    allMenus,
+    showMenu,
+    updateMenu,
+    deleteMenu
 }
