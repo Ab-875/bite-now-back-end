@@ -19,4 +19,4 @@ const menuSchema = new Schema ({
 
 const Menu = model('Menu', menuSchema)
 
-module.exports = menuSchema
+module.exports = Menu

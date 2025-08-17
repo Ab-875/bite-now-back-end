@@ -1,8 +1,8 @@
-const Item = require('../models/menu')
+const Menu = require('../models/menu')
 
-async function createdItem(req, res) {
+async function createdMenu(req, res) {
     try {
-        const createdItem = await Item.create(req.body)
+        const createdItem = await Menu.create(req.body)
         res.status(201).json(createdItem)
     }
     catch (error) {
@@ -10,9 +10,9 @@ async function createdItem(req, res) {
     }
 }
 
-async function allItems(req, res) {
+async function allMenus(req, res) {
     try {
-        const allItems = await Item.find()
+        const allItems = await Menu.find()
         res.status(200).json(allItems)
     }
     catch (error) {
@@ -20,9 +20,9 @@ async function allItems(req, res) {
     }
 }
 
-async function showItem(req, res) {
+async function showMenu(req, res) {
     try {
-        const item = await Item.findById(req.params.id)
+        const item = await Menu.findById(req.params.id)
         res.status(200).json(item)
     }
     catch (error) {
@@ -30,9 +30,9 @@ async function showItem(req, res) {
     }
 }
 
-async function updateItem(req, res) {
+async function updateMenu(req, res) {
     try {
-        const updatedItem = await Item.findByIdAndUpdate(req.params.id, req.body, { new: true })
+        const updatedItem = await Menu.findByIdAndUpdate(req.params.id, req.body, { new: true })
         res.status(200).json(updatedItem)
     }
     catch (error) {
@@ -40,9 +40,9 @@ async function updateItem(req, res) {
     }
 }
 
-async function deleteItem(req, res) {
+async function deleteMenu(req, res) {
     try {
-        const deletedItem = await Item.findByIdAndDelete(req.params.id)
+        const deletedItem = await Menu.findByIdAndDelete(req.params.id)
         res.status(200).json(deletedItem)
     }
     catch (error) {
@@ -51,9 +51,9 @@ async function deleteItem(req, res) {
 }
 
 module.exports = {
-    createdItem,
-    allItems,
-    showItem,
-    updateItem,
-    deleteItem
+    createdMenu,
+    allMenus,
+    showMenu,
+    updateMenu,
+    deleteMenu
 }
