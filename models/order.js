@@ -20,6 +20,10 @@ const orderSchema = new Schema({
     status: {
         type: String,
         required: true
+    },
+    user: {
+        type: Schema.model.ObjectId,
+        ref: "User"
     }
 })
 
