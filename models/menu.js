@@ -14,6 +14,10 @@ const menuSchema = new Schema ({
         required: true,
         minlength : 15
     },
+    owner: {
+        type: Schema.Types.ObjectId,
+        ref: "User"
+    }
 })
 
 
