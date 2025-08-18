@@ -1,19 +1,10 @@
 const mongoose = require('mongoose')
 const bcrypt = require('bcrypt')
-const Restaurant = require('./restaurant')
+
 
 const userSchema = new mongoose.Schema({
     username: { type: String, required: true, unique: true },
     passwordHash: { type: String, required: true },
-    role: {type: String, enum: ['customer','owner'], required: true},
-    restaurant: [{
-        type: mongoose.Schema.Types.ObjectId,
-        ref: 'Restaurant'
-    }],
-    cart: [{
-        type: mongoose.Schema.Types.ObjectId,
-        ref: 'Order'
-    }]
 })
 
 // helper method to compare passwords

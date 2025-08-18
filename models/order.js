@@ -29,6 +29,10 @@ const orderSchema = new Schema({
         type: String,
         enum: ['pending', 'cancelled', 'preparing', 'completed'],
         required: true
+    },
+    user: {
+        type: Schema.model.ObjectId,
+        ref: "User"
     }
 })
 
