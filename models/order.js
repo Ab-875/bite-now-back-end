@@ -1,24 +1,33 @@
 const { Schema, model } = require('mongoose')
 
 const orderSchema = new Schema({
-    foodItem: {
-        type: String,
-        required: true
+    customer: {
+        type: Schema.Types.ObjectId,
+        ref: "User"
     },
+    items: [
+        {
+            menuItem: {
+                type: Schema.Types.ObjectId,
+                ref: "Menu"
+            },
+            quantity: {
+                type: Number,
+                default: 1,
+                min: 1
+            },
+            notes: {
+                type: String
+            },
+        }
+    ],
     price: {
         type: Number,
         required: true
     },
-    description: {
-        type: String,
-        required: true
-    },
-    notes: {
-        type: String,
-        required: true
-    },
     status: {
         type: String,
+        enum: ['pending', 'cancelled', 'preparing', 'completed'],
         required: true
     },
     user: {
