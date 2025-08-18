@@ -20,7 +20,7 @@ exports.register = async (req, res) => {
         const passwordHash = await bcrypt.hash(password, 10)
 
         // create user
-        const newUser = new User({ username, passwordHash })
+        const newUser = new User({ username, passwordHash, role: "customer" })
         await newUser.save()
 
         res.status(201).json({ message: 'User registered successfully' })
@@ -45,7 +45,8 @@ exports.login = async (req, res) => {
         }
 
         const payload = {
-            id: user._id
+            id: user._id,
+            role: user.role
             // Add anything else that you want to put into the JWT token here
         }
         const token = jwt.sign(payload, SECRET, { expiresIn: '1h' }) //Look at the docs for more 'expires in' options
