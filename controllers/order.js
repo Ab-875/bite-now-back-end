@@ -2,7 +2,14 @@ const Order = require('../models/order')
 
 async function createOrder(req, res) {
     try {
-        const createdOrder = await Order.create(req.body)
+        if (req.user.role !== "customer") {
+            return (res.status(403).json({ error: "Only for Customers"}))
+        }
+        const createdOrder = await Order.create({
+            ...req.body,
+            customer: req.user._id,
+            status: "pending"
+        })
         res.status(201).json(createdOrder)
     }
     catch (error) {
@@ -12,7 +19,12 @@ async function createOrder(req, res) {
 
 async function allOrders(req, res) {
     try {
-        const allOrders = await Order.find()
+        let filterCustomer = {}
+
+        if (req.user.role === "customer") {
+            filterCustomer.customer = req.user._id
+        }
+        const allOrders = await Order.find(filterCustomer).populate("items.menuItem").populate("customer", "username")
         res.status(200).json(allOrders)
     }
     catch (error) {
@@ -22,7 +34,13 @@ async function allOrders(req, res) {
 
 async function showOrder(req, res) {
     try {
-        const order = await Order.findById(req.params.id)
+        const order = await Order.findById(req.params.id).populate("items.menuItem").populate("customer", "username")
+        if (!order) {
+            return (res.status(404).json({ error: "Not Found"}))
+        }
+        if (req.user.role === "customer" && !order.customer.equals(req.user._id)) {
+            return (res.status(403).json({ error: "Unauthorized"}))
+        }
         res.status(200).json(order)
     }
     catch (error) {
