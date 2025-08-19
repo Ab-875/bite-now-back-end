@@ -3,7 +3,7 @@ const bcrypt = require('bcrypt')
 const User = require('../models/user')
 const dotenv = require('dotenv').config()
 
- // use process.env.SECRET in production
+// use process.env.SECRET in production
 
 // POST /auth/register
 exports.register = async (req, res) => {
@@ -20,8 +20,11 @@ exports.register = async (req, res) => {
         const passwordHash = await bcrypt.hash(password, 10)
 
         // create user
-
-        const newUser = new User({ username, passwordHash, role: "customer" })
+        const newUser = new User({
+            username,
+            passwordHash,
+            role: "customer"
+        })
 
         await newUser.save()
 
@@ -49,10 +52,11 @@ exports.login = async (req, res) => {
 
         const payload = {
             id: user._id,
-            role: user.role
-            // Add anything else that you want to put into the JWT token here
+            role: (user.role || 'customer').toLowerCase()
+            // add more fields here if needed (e.g. username, email)
         }
-        const token = jwt.sign(payload, SECRET, { expiresIn: '1h' }) //Look at the docs for more 'expires in' options
+
+        const token = jwt.sign(payload, SECRET, { expiresIn: '1h' })
         res.json({ token })
     } catch (err) {
         res.status(500).json({ message: 'Server error' })
