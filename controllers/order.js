@@ -64,11 +64,12 @@ async function showOrder(req, res) {
     try {
         const order = await Order.findById(req.params.id)
             .populate("items.menuItem")
-            .populate("customer", "username")
+            .populate("customer", "username _id")
         if (!order) {
             return res.status(404).json({ error: "Not Found" })
         }
-        if (req.user.role === "customer" && String(order.customer) !== String(req.user.id)) {
+        const customerId = order.customer?._id ? String(order.customer._id) : String(order.customer)
+        if (req.user.role === "customer" && customerId !== String(req.user.id)) {
             return res.status(403).json({ error: "Unauthorized" })
         }
         res.status(200).json(order)
@@ -76,6 +77,7 @@ async function showOrder(req, res) {
         res.status(500).json({ error: error.message })
     }
 }
+
 
 async function updateOrder(req, res) {
     try {
