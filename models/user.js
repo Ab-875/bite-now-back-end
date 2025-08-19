@@ -5,6 +5,7 @@ const bcrypt = require('bcrypt')
 const userSchema = new mongoose.Schema({
     username: { type: String, required: true, unique: true },
     passwordHash: { type: String, required: true },
+    role: { type: String, enum: ['customer', 'owner'] }
 })
 
 // helper method to compare passwords
