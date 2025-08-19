@@ -1,7 +1,8 @@
 const jwt = require('jsonwebtoken')
-const SECRET = 'supersecret' // should be process.env.SECRET
+// should be process.env.SECRET
 
 module.exports = function secureRoute(req, res, next) {
+  const SECRET = process.env.SECRET 
   const authHeader = req.headers['authorization']
   const token = authHeader && authHeader.split(' ')[1]
 

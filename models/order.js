@@ -31,7 +31,7 @@ const orderSchema = new Schema({
         required: true
     },
     user: {
-        type: Schema.model.ObjectId,
+        type: Schema.Types.ObjectId,
         ref: "User"
     }
 })

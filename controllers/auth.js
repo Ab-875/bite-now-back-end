@@ -3,7 +3,7 @@ const bcrypt = require('bcrypt')
 const User = require('../models/user')
 const dotenv = require('dotenv').config()
 
-const SECRET = process.env.SECRET // use process.env.SECRET in production
+ // use process.env.SECRET in production
 
 // POST /auth/register
 exports.register = async (req, res) => {
@@ -34,6 +34,7 @@ exports.register = async (req, res) => {
 // POST /auth/login
 exports.login = async (req, res) => {
     try {
+        const SECRET = process.env.SECRET
         const { username, password } = req.body
         const user = await User.findOne({ username })
 
