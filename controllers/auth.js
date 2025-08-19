@@ -52,7 +52,7 @@ exports.login = async (req, res) => {
 
         const payload = {
             id: user._id,
-            role: user.role
+            role: (user.role || 'customer').toLowerCase()
             // add more fields here if needed (e.g. username, email)
         }
 

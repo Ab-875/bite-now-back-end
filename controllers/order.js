@@ -2,11 +2,12 @@ const Order = require('../models/order')
 const Menu = require('../models/menu')
 
 async function createOrder(req, res) {
+    console.log('createOrder req.user =', req.user)
     try {
-        if (!req.user || req.user.role !== "customer") {
-            return (res.status(403).json({ error: "Only for Customers" }))
+        const role = (req.user?.role || '').toLowerCase()
+        if (role !== 'customer') {
+            return res.status(403).json({ error: "Only for Customers" })
         }
-
         const items = Array.isArray(req.body.items) ? req.body.items : []
         if (!items.length) {
             return (res.status(400).json({ error: "Items array is required" }))
